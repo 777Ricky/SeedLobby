@@ -1,0 +1,13 @@
+name: SeedLobby
+author: Ricky
+version: 1.0
+api-version: 1.14
+main: com.theseedme.lobby.SeedLobby
+
+commands:
+  transfer:
+    aliases: server
+
+permissions:
+  seedlobby.admin:
+    description: "Bypass player listeners (Modify world and fuck shit up)"

@@ -8,6 +8,10 @@ import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.entity.Player;
+import org.bukkit.scheduler.BukkitRunnable;
+
+import java.util.ArrayList;
+import java.util.Objects;
 
 public class Utils {
 
@@ -25,23 +29,27 @@ public class Utils {
     }
 
     public static void teleportSpawn(Player player) {
-        World world = Bukkit.getWorld(SeedLobby.get().getConfig().getString("Spawn.world"));
-        double x = SeedLobby.get().getConfig().getDouble("Spawn.X");
-        double y = SeedLobby.get().getConfig().getDouble("Spawn.Y");
-        double z = SeedLobby.get().getConfig().getDouble("Spawn.Z");
+        World world = Bukkit.getWorld(Objects.requireNonNull(SeedLobby.get().getConfig().getString("Spawn.world")));
+
+        double x = SeedLobby.get().getConfig().getDouble("Spawn.x");
+        double y = SeedLobby.get().getConfig().getDouble("Spawn.y");
+        double z = SeedLobby.get().getConfig().getDouble("Spawn.z");
         float yaw = (float) SeedLobby.get().getConfig().getDouble("Spawn.yaw");
         float pitch = (float) SeedLobby.get().getConfig().getDouble("Spawn.pitch");
+
         Location location = new Location(world, x, y, z);
+
         location.setYaw(yaw);
         location.setPitch(pitch);
-        player.setFallDistance(0.0f);
+
         player.teleport(location);
+        Bukkit.getScheduler().runTaskLater(SeedLobby.get(), () -> player.teleport(location), 2);
     }
 
     public static void sendMOTD(Player player) {
         player.sendMessage(replaceColors("&7&m=------------------------------------------="));
         player.sendMessage(replaceColors("&7&l»                &fWelcome to &a&lThe Seed&f."));
-        Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "tellraw " + player.getName() + " [\"\"\"\",{\"\"text\"\":\"\"»          &7[\"\",\"\"color\"\":\"\"gray\"\",\"\"bold\"\":\"\"true\"\"},{\"\"text\"\":\"\"MELON\"\",\"\"color\"\":\"\"green\"\",\"\"bold\"\":true,\"\"clickEvent\"\":{\"\"action\"\":\"\"run_command\"\",\"\"value\"\":\"\"/transfer melon\"\"},\"\"hoverEvent\"\":{\"\"action\"\":\"\"show_text\"\",\"\"value\"\":{\"\"text\"\":\"\"\"\",\"\"extra\"\":[{\"\"text\"\":\"\"Click to connect!\"\",\"\"color\"\":\"\"gray\"\"}]}}},{\"\"text\"\":\"\"]  \"\",\"\"color\"\":\"\"gray\"\",\"\"bold\"\":false},{\"\"text\"\":\"\"[\"\",\"\"color\"\":\"\"gray\"\"},{\"\"text\"\":\"\"PUMPKIN\"\",\"\"color\"\":\"\"gold\"\",\"\"bold\"\":true,\"\"clickEvent\"\":{\"\"action\"\":\"\"run_command\"\",\"\"value\"\":\"\"/transfer pumpkin\"\"},\"\"hoverEvent\"\":{\"\"action\"\":\"\"show_text\"\",\"\"value\"\":{\"\"text\"\":\"\"\"\",\"\"extra\"\":[{\"\"text\"\":\"\"Click to connect!\"\",\"\"color\"\":\"\"gray\"\"}]}}},{\"\"text\"\":\"\"]  \"\",\"\"color\"\":\"\"gray\"\",\"\"bold\"\":false},{\"\"text\"\":\"\"[\"\",\"\"color\"\":\"\"gray\"\"},{\"\"text\"\":\"\"MUSHROOM\"\",\"\"color\"\":\"\"light_purple\"\",\"\"bold\"\":true,\"\"clickEvent\"\":{\"\"action\"\":\"\"run_command\"\",\"\"value\"\":\"\"/transfer mushroom\"\"},\"\"hoverEvent\"\":{\"\"action\"\":\"\"show_text\"\",\"\"value\"\":{\"\"text\"\":\"\"\"\",\"\"extra\"\":[{\"\"text\"\":\"\"Click to connect!\"\",\"\"color\"\":\"\"gray\"\"}]}}},{\"\"text\"\":\"\"]\"\",\"\"color\"\":\"\"gray\"\",\"\"bold\"\":false}]");
+        Bukkit.dispatchCommand(Bukkit.getConsoleSender(),  "tellraw " + player.getName() + " [\"\",{\"text\":\"»          " + ChatColor.GRAY + "[\",\"color\":\"gray\",\"bold\":\"true\"},{\"text\":\"MELON\",\"color\":\"green\",\"bold\":true,\"clickEvent\":{\"action\":\"run_command\",\"value\":\"/transfer melon\"},\"hoverEvent\":{\"action\":\"show_text\",\"value\":{\"text\":\"\",\"extra\":[{\"text\":\"Click to connect!\",\"color\":\"gray\"}]}}},{\"text\":\"]  \",\"color\":\"gray\",\"bold\":false},{\"text\":\"[\",\"color\":\"gray\"},{\"text\":\"PUMPKIN\",\"color\":\"gold\",\"bold\":true,\"clickEvent\":{\"action\":\"run_command\",\"value\":\"/transfer pumpkin\"},\"hoverEvent\":{\"action\":\"show_text\",\"value\":{\"text\":\"\",\"extra\":[{\"text\":\"Click to connect!\",\"color\":\"gray\"}]}}},{\"text\":\"]  \",\"color\":\"gray\",\"bold\":false},{\"text\":\"[\",\"color\":\"gray\"},{\"text\":\"MUSHROOM\",\"color\":\"light_purple\",\"bold\":true,\"clickEvent\":{\"action\":\"run_command\",\"value\":\"/transfer mushroom\"},\"hoverEvent\":{\"action\":\"show_text\",\"value\":{\"text\":\"\",\"extra\":[{\"text\":\"Click to connect!\",\"color\":\"gray\"}]}}},{\"text\":\"]\",\"color\":\"gray\",\"bold\":false}]");
         player.sendMessage(replaceColors("&7&m=------------------------------------------="));
     }
 
@@ -49,19 +57,27 @@ public class Utils {
         ByteArrayDataOutput out = ByteStreams.newDataOutput();
 
         if (server.equalsIgnoreCase("melon")) {
+
             out.writeUTF("ConnectOther");
             out.writeUTF(player.getName());
             out.writeUTF("melon");
+
         } else if (server.equalsIgnoreCase("pumpkin")) {
+
             out.writeUTF("ConnectOther");
             out.writeUTF(player.getName());
             out.writeUTF("pumpkin");
+
         } else if (server.equalsIgnoreCase("mushroom")) {
+
             out.writeUTF("ConnectOther");
             out.writeUTF(player.getName());
             out.writeUTF("mushroom");
+
         } else {
+
             player.sendMessage(replaceColors("&c&lERROR: &7/transfer <melon|pumpkin|mushroom>"));
+
         }
 
         player.sendPluginMessage(SeedLobby.get(), "BungeeCord", out.toByteArray());

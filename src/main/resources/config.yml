@@ -5,3 +5,18 @@ Spawn:
   z: 0.0
   yaw: 0.0
   pitch: 0.0
+
+chat:
+  group-formats:
+    default: '&9[&7Newcomer&9]&7 %prefix%%playername%%suffix% &8»&7 '
+    nomad: '&9[&7Nomad&9]&7 %playername% &8»&7 '
+    commoner: '&9[&7Commoner&9]&7 %playername% &8»&7 '
+    settler: '&9[&7Settler&9]&7 %playername% &8»&7 '
+    bishop: '&9[&7Bishop&9]&7 %playername% &8»&7 '
+    owner: '&5&l[&d&lOWNER&5&l]&d %playername%&7 &8»&7&e'
+    noble: '&8[&7Noble&8] &7%playername%&e &8»&7 &f'
+    mod: '&8[&9Mod&8] &f%playername%&9 &8»&7 &e'
+    duke: '&8[&a&lDuke&8]&7 %playername%&e &8»&7 &f'
+    baron: '&8[&c&lBaron&8] &7%playername%&c &8»&7 &f'
+    admin: '&8[&4Admin&8] &7%playername%&8 &8»&7 &e'
+    archduke: '&8[&b&lArchduke&8] &7%playername%&b &8»&7 &f'

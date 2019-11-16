@@ -1,10 +1,12 @@
 package com.theseedmc.lobby.listeners;
 
 import com.theseedmc.lobby.utils.Utils;
+import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.block.BlockBreakEvent;
@@ -53,13 +55,6 @@ public class PlayerListener implements Listener {
             return;
         }
 
-        if (action == Action.RIGHT_CLICK_BLOCK || action == Action.LEFT_CLICK_BLOCK) {
-            if (block.getType() == Material.ITEM_FRAME) {
-                event.setCancelled(true);
-                return;
-            }
-        }
-
         if (action != Action.PHYSICAL) {
             return;
         }
@@ -71,17 +66,17 @@ public class PlayerListener implements Listener {
 
     @EventHandler
     public void onEntityDamage(EntityDamageEvent event) {
-        if (event.getEntity() instanceof Player) {
+        if (!(event.getEntity() instanceof Player)) {
             return;
         }
 
         Player player = (Player) event.getEntity();
 
-        event.setCancelled(true);
-
         if (event.getCause() == EntityDamageEvent.DamageCause.VOID) {
+            event.setCancelled(true);
             Utils.teleportSpawn(player);
         }
+        event.setCancelled(true);
     }
 
     @EventHandler
@@ -89,7 +84,7 @@ public class PlayerListener implements Listener {
         event.setCancelled(true);
     }
 
-    @EventHandler
+    @EventHandler(priority = EventPriority.LOWEST)
     public void onPlayerJoin(PlayerJoinEvent event) {
         Player player = event.getPlayer();
 

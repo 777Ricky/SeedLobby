@@ -8,7 +8,7 @@ import org.bukkit.entity.Player;
 public class TransferCommand extends AbstractCommand {
 
     public TransferCommand() {
-        super("transfer", "", false);
+        super("transfer", "seedlobby.user", false);
     }
 
     @Override

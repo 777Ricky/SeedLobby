@@ -4,6 +4,8 @@ import com.theseedmc.lobby.utils.Utils;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
+import org.bukkit.entity.Entity;
+import org.bukkit.entity.ItemFrame;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -13,6 +15,7 @@ import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.FoodLevelChangeEvent;
+import org.bukkit.event.player.PlayerInteractAtEntityEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
@@ -62,6 +65,20 @@ public class PlayerListener implements Listener {
         if (block.getType() == Material.FARMLAND) {
             event.setCancelled(true);
         }
+    }
+
+    @EventHandler
+    public void onItemFrameEdit(PlayerInteractAtEntityEvent event) {
+        Player player = event.getPlayer();
+        Entity entity = event.getRightClicked();
+
+        if (player.hasPermission("seedlobby.admin"))
+
+        if (!(entity instanceof ItemFrame)) {
+            return;
+        }
+
+        event.setCancelled(true);
     }
 
     @EventHandler

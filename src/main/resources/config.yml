@@ -7,6 +7,7 @@ Spawn:
   pitch: 0.0
 
 chat:
+  default: '&9[&7Newcomer&9]&7 %playername% &8»&7 '
   group-formats:
     default: '&9[&7Newcomer&9]&7 %prefix%%playername%%suffix% &8»&7 '
     nomad: '&9[&7Nomad&9]&7 %playername% &8»&7 '

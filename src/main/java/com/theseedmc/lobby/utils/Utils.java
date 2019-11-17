@@ -56,26 +56,15 @@ public class Utils {
         ByteArrayDataOutput out = ByteStreams.newDataOutput();
 
         if (server.equalsIgnoreCase("melon")) {
-
-            out.writeUTF(player.getUniqueId().toString());
-            out.writeUTF("melon");
-
+            player.performCommand("bungeeplayer joinqueue melon");
         } else if (server.equalsIgnoreCase("pumpkin")) {
-
-            out.writeUTF(player.getUniqueId().toString());
-            out.writeUTF("pumpkin");
-
+            player.performCommand("bungeeplayer joinqueue pumpkin");
         } else if (server.equalsIgnoreCase("mushroom")) {
-
-            out.writeUTF(player.getUniqueId().toString());
-            out.writeUTF("mushroom");
-
+            player.performCommand("bungeeplayer joinqueue mushroom");
         } else {
 
             player.sendMessage(replaceColors("&c&lERROR: &7/transfer <melon|pumpkin|mushroom>"));
 
         }
-
-        player.sendPluginMessage(SeedLobby.get(), "queue:join", out.toByteArray());
     }
 }

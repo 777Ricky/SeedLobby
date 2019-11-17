@@ -47,6 +47,7 @@ public class Utils {
     public static void sendMOTD(Player player) {
         player.sendMessage(replaceColors("&7&m=------------------------------------------="));
         player.sendMessage(replaceColors("&7&l»                &fWelcome to &a&lThe Seed&f."));
+        player.sendMessage(replaceColors("&7&l»"));
         Bukkit.dispatchCommand(Bukkit.getConsoleSender(),  "tellraw " + player.getName() + " [\"\",{\"text\":\"»          " + ChatColor.GRAY + "[\",\"color\":\"gray\",\"bold\":\"true\"},{\"text\":\"MELON\",\"color\":\"green\",\"bold\":true,\"clickEvent\":{\"action\":\"run_command\",\"value\":\"/transfer melon\"},\"hoverEvent\":{\"action\":\"show_text\",\"value\":{\"text\":\"\",\"extra\":[{\"text\":\"Click to connect!\",\"color\":\"gray\"}]}}},{\"text\":\"]  \",\"color\":\"gray\",\"bold\":false},{\"text\":\"[\",\"color\":\"gray\"},{\"text\":\"PUMPKIN\",\"color\":\"gold\",\"bold\":true,\"clickEvent\":{\"action\":\"run_command\",\"value\":\"/transfer pumpkin\"},\"hoverEvent\":{\"action\":\"show_text\",\"value\":{\"text\":\"\",\"extra\":[{\"text\":\"Click to connect!\",\"color\":\"gray\"}]}}},{\"text\":\"]  \",\"color\":\"gray\",\"bold\":false},{\"text\":\"[\",\"color\":\"gray\"},{\"text\":\"MUSHROOM\",\"color\":\"light_purple\",\"bold\":true,\"clickEvent\":{\"action\":\"run_command\",\"value\":\"/transfer mushroom\"},\"hoverEvent\":{\"action\":\"show_text\",\"value\":{\"text\":\"\",\"extra\":[{\"text\":\"Click to connect!\",\"color\":\"gray\"}]}}},{\"text\":\"]\",\"color\":\"gray\",\"bold\":false}]");
         player.sendMessage(replaceColors("&7&m=------------------------------------------="));
     }
@@ -56,20 +57,20 @@ public class Utils {
 
         if (server.equalsIgnoreCase("melon")) {
 
-            out.writeUTF("ConnectOther");
-            out.writeUTF(player.getName());
+            out.writeUTF("Join");
+            out.writeUTF(player.getUniqueId().toString());
             out.writeUTF("melon");
 
         } else if (server.equalsIgnoreCase("pumpkin")) {
 
-            out.writeUTF("ConnectOther");
-            out.writeUTF(player.getName());
+            out.writeUTF("Join");
+            out.writeUTF(player.getUniqueId().toString());
             out.writeUTF("pumpkin");
 
         } else if (server.equalsIgnoreCase("mushroom")) {
 
-            out.writeUTF("ConnectOther");
-            out.writeUTF(player.getName());
+            out.writeUTF("Join");
+            out.writeUTF(player.getUniqueId().toString());
             out.writeUTF("mushroom");
 
         } else {
@@ -78,6 +79,6 @@ public class Utils {
 
         }
 
-        player.sendPluginMessage(SeedLobby.get(), "BungeeCord", out.toByteArray());
+        player.sendPluginMessage(SeedLobby.get(), "Queue", out.toByteArray());
     }
 }

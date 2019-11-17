@@ -57,19 +57,16 @@ public class Utils {
 
         if (server.equalsIgnoreCase("melon")) {
 
-            out.writeUTF("Join");
             out.writeUTF(player.getUniqueId().toString());
             out.writeUTF("melon");
 
         } else if (server.equalsIgnoreCase("pumpkin")) {
 
-            out.writeUTF("Join");
             out.writeUTF(player.getUniqueId().toString());
             out.writeUTF("pumpkin");
 
         } else if (server.equalsIgnoreCase("mushroom")) {
 
-            out.writeUTF("Join");
             out.writeUTF(player.getUniqueId().toString());
             out.writeUTF("mushroom");
 
@@ -79,6 +76,6 @@ public class Utils {
 
         }
 
-        player.sendPluginMessage(SeedLobby.get(), "Queue", out.toByteArray());
+        player.sendPluginMessage(SeedLobby.get(), "queue:join", out.toByteArray());
     }
 }

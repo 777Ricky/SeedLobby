@@ -56,15 +56,25 @@ public class Utils {
         ByteArrayDataOutput out = ByteStreams.newDataOutput();
 
         if (server.equalsIgnoreCase("melon")) {
+
             player.performCommand("bungeeplayer joinqueue melon");
+
         } else if (server.equalsIgnoreCase("pumpkin")) {
+
             player.performCommand("bungeeplayer joinqueue pumpkin");
+
         } else if (server.equalsIgnoreCase("mushroom")) {
+
             player.performCommand("bungeeplayer joinqueue mushroom");
+
         } else {
 
             player.sendMessage(replaceColors("&c&lERROR: &7/transfer <melon|pumpkin|mushroom>"));
 
         }
+    }
+
+    public static String getFormat(Player player) {
+        return SeedLobby.get().getPermissions().getPrimaryGroup(player);
     }
 }

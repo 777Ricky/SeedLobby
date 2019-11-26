@@ -50,6 +50,10 @@ public class PlayerListener implements Listener {
         Action action = event.getAction();
         Block block = event.getClickedBlock();
 
+        if (block.getType() == Material.FARMLAND) {
+            event.setCancelled(true);
+        }
+
         if (player.hasPermission("seedlobby.admin")) {
             return;
         }
@@ -60,10 +64,6 @@ public class PlayerListener implements Listener {
 
         if (action != Action.PHYSICAL) {
             return;
-        }
-
-        if (block.getType() == Material.FARMLAND) {
-            event.setCancelled(true);
         }
     }
 

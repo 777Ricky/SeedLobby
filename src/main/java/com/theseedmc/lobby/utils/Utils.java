@@ -69,7 +69,7 @@ public class Utils {
 
         } else {
 
-            player.sendMessage(replaceColors("&c&lERROR: &7/transfer <melon|pumpkin|mushroom>"));
+            player.sendMessage(replaceColors("&c&lERROR: &7Usage: /transfer <melon|pumpkin|mushroom>"));
 
         }
     }

@@ -7,6 +7,7 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.bukkit.ChatColor;
 
 public abstract class AbstractCommand implements CommandExecutor {
 
@@ -36,7 +37,7 @@ public abstract class AbstractCommand implements CommandExecutor {
         if (!cmd.getLabel().equalsIgnoreCase(commandName))
             return true;
         if (!sender.hasPermission(permission)) {
-            sender.sendMessage("Unknown command. Type \"/help\" for help.");
+            sender.sendMessage(ChatColor.translateAlternateColorCodes('&', "&c&lERROR: &7No permission."));
             return true;
         }
         if (!canConsoleUse && !(sender instanceof Player)) {

@@ -67,6 +67,18 @@ public class Utils {
 
             player.performCommand("bungeeplayer joinqueue mushroom");
 
+        } else if (server.equalsIgnoreCase("lobby-1")) {
+
+            player.performCommand("bungeeplayer joinqueue lobby-1");
+
+        } else if (server.equalsIgnoreCase("lobby-2")) {
+
+            player.performCommand("bungeeplayer joinqueue lobby-2");
+
+        } else if (server.equalsIgnoreCase("lobby-3")) {
+
+            player.performCommand("bungeeplayer joinqueue lobby-3");
+
         } else {
 
             player.sendMessage(replaceColors("&c&lERROR: &7Usage: /transfer <melon|pumpkin|mushroom>"));

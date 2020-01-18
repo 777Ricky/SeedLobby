@@ -107,6 +107,7 @@ public class PlayerListener implements Listener {
 
         Utils.teleportSpawn(player);
         Utils.sendMOTD(player);
+        player.getInventory().clear();
 
         event.setJoinMessage(null);
     }

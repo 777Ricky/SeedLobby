@@ -17,7 +17,7 @@ public class TransferCommand extends AbstractCommand {
         Player player = (Player) sender;
 
         if (args.length != 1 || args[0] == null) {
-            player.sendMessage(Utils.replaceColors("&c&lERROR: &7Usage: /transfer <melon|pumpkin|mushroom|lobby-[1..3]>"));
+            player.sendMessage(Utils.replaceColors("&c&lERROR: &7Usage: /transfer <melon|pumpkin|mushroom>"));
             return;
         }
 

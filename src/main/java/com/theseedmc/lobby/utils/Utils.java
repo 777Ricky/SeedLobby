@@ -67,9 +67,13 @@ public class Utils {
 
             player.performCommand("bungeeplayer joinqueue mushroom");
 
+        } else if (server.equalsIgnoreCase("event")) {
+
+            player.performCommand("bungeeplayer joinqueue eventLobby");
+
         } else {
 
-            player.sendMessage(replaceColors("&c&lERROR: &7Usage: /transfer <melon|pumpkin|mushroom>"));
+            player.sendMessage(replaceColors("&c&lERROR: &7Usage: /transfer <melon|pumpkin|mushroom|event>"));
 
         }
     }
